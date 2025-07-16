@@ -40,6 +40,7 @@ public class ProductController {
 //		return service.searchProductByCategory(category);
 //	}
 //	
+	
 	@PostMapping("/updateProduct")
 	public String updateProduct(@RequestBody Product product){
 		return service.updateProduct(product);
