@@ -30,7 +30,6 @@ public class ProductController {
 		return service.searchProduct(id);
 	}
 	
-	
 //	@PostMapping("/searchProduct")
 //	public Product searchProduct(@RequestBody String name){
 //		return service.searchProduct(name);
