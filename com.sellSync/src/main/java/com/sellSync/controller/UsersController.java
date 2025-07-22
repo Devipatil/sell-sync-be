@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sellSync.entity.UserLoginData;
 import com.sellSync.entity.Users;
 import com.sellSync.service.UsersService;
 
@@ -31,5 +32,30 @@ public class UsersController {
 			msg = "User already exist!";
 		}
 		return msg;		
+	}
+	
+	@PostMapping("/signIn")
+	public String signIn(@RequestBody UserLoginData user) {
+		String msg = "";
+		String username = user.getUsername();
+		String password = user.getPassword();
+		Users u = service.getUser(username);
+		if (u == null) {
+			msg = "Username does not exist!";
+		} else {
+			boolean status = service.validate(username, password);
+			if (status == true) {
+				if (u.getRole().equals("admin")) {
+				     msg = "admin";
+			     }
+				else {
+					msg = "customer";
+				}
+			}
+			 else {
+			       msg = "Wrong password";
+			}
+		}
+		return msg;
 	}
 }

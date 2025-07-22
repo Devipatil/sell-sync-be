@@ -20,5 +20,10 @@ public class UsersServiceImplementation implements UsersService {
 	public Users getUser(String username) {
 		return repo.findByUsername(username);
 	}
-
+	
+	public boolean validate(String username, String password) {
+		Users user = getUser(username);
+		String dbPassword = user.getPassword();
+		return (password.equals(dbPassword));
+	}
 }
