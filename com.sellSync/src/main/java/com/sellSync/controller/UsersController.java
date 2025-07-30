@@ -15,17 +15,17 @@ import com.sellSync.service.UsersService;
 public class UsersController {
 	
 	@Autowired
-	UsersService service;
+	UsersService uService;
 	
 	@PostMapping("/signUp")
 	public String signUp(@RequestBody Users user) {
 		
 		String msg = "";
 		String username = user.getUsername();
-		Users u = service.getUser(username);
+		Users u = uService.getUser(username);
 		
 		if (u == null) {
-			service.signUp(user);
+			uService.signUp(user);
 			msg = "User created successfully!";
 		}
 		else {
@@ -39,11 +39,11 @@ public class UsersController {
 		String msg = "";
 		String username = user.getUsername();
 		String password = user.getPassword();
-		Users u = service.getUser(username);
+		Users u = uService.getUser(username);
 		if (u == null) {
 			msg = "Username does not exist!";
 		} else {
-			boolean status = service.validate(username, password);
+			boolean status = uService.validate(username, password);
 			if (status == true) {
 				if (u.getRole().equals("admin")) {
 				     msg = "admin";
