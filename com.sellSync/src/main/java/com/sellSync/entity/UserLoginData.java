@@ -1,9 +1,8 @@
 package com.sellSync.entity;
 
-
 public class UserLoginData {
-	 String username;
-	 String password;
+	String username;
+	String password;
 	public UserLoginData() {
 		super();
 		// TODO Auto-generated constructor stub

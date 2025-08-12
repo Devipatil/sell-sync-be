@@ -1,112 +1,70 @@
 package com.sellSync.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Users {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long id;
-	String username;
-	String email;
-	String password;
-	String gender;
-	String dob;
-	String role;
-	
-	@OneToOne
-	Cart cart;
-	
-	public Users() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
-	public Users(Long id, String username, String email, String password, String gender, String dob, String role,
-			Cart cart) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.email = email;
-		this.password = password;
-		this.gender = gender;
-		this.dob = dob;
-		this.role = role;
-		this.cart = cart;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
 
-	public Long getId() {
-		return id;
-	}
+    String username;
+    String email;
+    String password;
+    String gender;
+    String dob;
+    String role;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference        // serialise Users → Cart (inverse of @JsonBackReference)
+    private Cart cart;
 
-	public String getUsername() {
-		return username;
-	}
+    /* ---------- constructors ---------- */
+    public Users() {}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public Users(Long id, String username, String email, String password,
+                 String gender, String dob, String role, Cart cart) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+        this.dob = dob;
+        this.role = role;
+        this.cart = cart;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    /* ---------- getters / setters ---------- */
+    public Long getId()                { return id; }
+    public void setId(Long id)         { this.id = id; }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getUsername()        { return username; }
+    public void setUsername(String u)  { this.username = u; }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getEmail()           { return email; }
+    public void setEmail(String e)     { this.email = e; }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getPassword()        { return password; }
+    public void setPassword(String p)  { this.password = p; }
 
-	public String getGender() {
-		return gender;
-	}
+    public String getGender()          { return gender; }
+    public void setGender(String g)    { this.gender = g; }
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+    public String getDob()             { return dob; }
+    public void setDob(String d)       { this.dob = d; }
 
-	public String getDob() {
-		return dob;
-	}
+    public String getRole()            { return role; }
+    public void setRole(String r)      { this.role = r; }
 
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
+    public Cart getCart()              { return cart; }
+    public void setCart(Cart cart)     { this.cart = cart; }
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public Cart getCart() {
-		return cart;
-	}
-
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
-
-	@Override
-	public String toString() {
-		return "Users [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
-				+ ", gender=" + gender + ", dob=" + dob + ", role=" + role + ", cart=" + cart + "]";
-	}
-	
+    @Override
+    public String toString() {
+        return "Users [id=" + id + ", username=" + username + ", email=" + email +
+               ", password=" + password + ", gender=" + gender + ", dob=" + dob +
+               ", role=" + role + ", cart=" + cart + "]";
+    }
 }

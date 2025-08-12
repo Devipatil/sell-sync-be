@@ -6,5 +6,5 @@ public interface UsersService {
 	
 	void signUp(Users user);
 	Users getUser(String username);
-	boolean validate(String username, String password);
+	boolean validate(String username, String password2);
 }
